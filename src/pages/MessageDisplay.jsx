@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const MessageDisplay = () => {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('loading....');
 
   useEffect(() => {
     axios.get('http://localhost:8081/api/v1/get-message')
@@ -17,8 +17,8 @@ const MessageDisplay = () => {
 
   return (
     <div>
-      <h1>Message from API:</h1>
-      <p>{message}</p>
+      <h2>Message from API:</h2>
+      <h1>{message}</h1>
     </div>
   );
 };
