@@ -149,30 +149,6 @@
 				</executions>
 			</plugin>
 
-			<!-- Copy frontend build to correct location -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.2.0</version>
-				<executions>
-					<execution>
-						<id>copy-frontend-build</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>src/main/webapp/WEB-INF/static</outputDirectory>
-							<resources>
-								<resource>
-									<directory>src/main/app/dist</directory>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
 			<!-- WAR packaging -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

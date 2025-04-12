@@ -1,12 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
-
-<t:template title="Home Page"
-            mainCss="/static/assets/index-D8b4DHJx.css"
-            mainJs="/static/assets/index-M_k7Nu60.js">
-
-    <jsp:body>
-        <div id="root"></div>
-
-    </jsp:body>
-</t:template>
+<>
+<DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My App</title>
+    <link rel="stylesheet" href="/static/assets/index-Dtn62Xmo.css">
+</head>
+<body>
+    <div id="root"></div>
+    <script src="/static/assets/index-B6TIkHs9.js"></script>
+</body>
+</html>
