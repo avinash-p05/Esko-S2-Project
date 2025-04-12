@@ -80,6 +80,28 @@
   cursor: not-allowed;
 }
 
+.approve-button {
+  background-color: #aeb913;
+  color: white;
+  border: none;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: auto;
+  transition: background-color 0.2s;
+}
+
+.approve-button:hover {
+  background-color: #7c8508;
+}
+
+.approve-button:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}
+
 .loading-message,
 .no-documents-message {
   color: #6b7280;

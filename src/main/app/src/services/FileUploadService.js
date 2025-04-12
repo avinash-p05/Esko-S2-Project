@@ -1,8 +1,9 @@
 // FileUploadService.js
 import axios from "axios";
+import config from "./config";
 
 const api = axios.create({
-  baseURL: "http://repo.ldev.cloudi.city:11000",
+  baseURL: config.repoBaseUrl,
   withCredentials: true,
 });
 
@@ -13,7 +14,7 @@ export const uploadFileToRepo = async (file, setStatus) => {
   }
 
   const encodedFileName = encodeURIComponent(file.name);
-  const nodePath = `Hcpd89J8CRdiNpQ/intern-parth/${encodedFileName}`;
+  const nodePath = `${config.repoId}/${config.siteName}/${encodedFileName}`;
 
   try {
     setStatus("Creating node...");
@@ -39,7 +40,7 @@ export const uploadFileToRepo = async (file, setStatus) => {
 
     // Step 2: Get presigned S3 upload URL
     const res = await axios.post(
-      `http://repo.ldev.cloudi.city:11000/CONTENT/v0/${nodePath}?contentid=content&s3uri=true&overwrite=true&originalFileName=${encodedFileName}`,
+      `${config.repoBaseUrl}/CONTENT/v0/${nodePath}?contentid=content&s3uri=true&overwrite=true&originalFileName=${encodedFileName}`,
       null,
       { withCredentials: true }
     );
@@ -48,7 +49,7 @@ export const uploadFileToRepo = async (file, setStatus) => {
 
     setStatus("Connecting WebSocket...");
 
-    const ws = new WebSocket(`ws://repo.ldev.cloudi.city:11000/${statusUri}`);
+    const ws = new WebSocket(`ws://${config.repoBaseUrl.replace("http://", "")}/${statusUri}`);
     let ping = null;
 
     return new Promise((resolve, reject) => {

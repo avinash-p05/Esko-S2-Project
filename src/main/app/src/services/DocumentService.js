@@ -39,7 +39,7 @@ export const fetchDocuments = async () => {
     return response.data.childrenNodes.hits.hits.map(hit => {
       const source = hit._source;
       return {
-        id: hit._id,
+        id: source.nodeId,
         name: source.name,
         thumbnail: source["contentPath-S3-thumbnail-200x200"],
         largeThumbnail: source["contentPath-S3-thumbnail-500x500"],
