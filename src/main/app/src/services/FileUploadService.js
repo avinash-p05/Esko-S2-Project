@@ -13,7 +13,7 @@ export const uploadFileToRepo = async (file, setStatus) => {
   }
 
   const encodedFileName = encodeURIComponent(file.name);
-  const nodePath = `Hcpd89J8AankZsi/esko-interns/${encodedFileName}`;
+  const nodePath = `Hcpd89J8CRdiNpQ/intern-parth/${encodedFileName}`;
 
   try {
     setStatus("Creating node...");
