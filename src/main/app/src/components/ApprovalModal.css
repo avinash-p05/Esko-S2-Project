@@ -89,17 +89,11 @@ textarea {
   resize: vertical;
 }
 
-.approver-selection {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
 .selected-approvers {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .selected-approver {
@@ -118,13 +112,50 @@ textarea {
   cursor: pointer;
   color: #666;
   font-size: 16px;
+  padding: 0;
 }
 
-.user-icon {
-  width: 20px;
-  height: 20px;
+/* Replace user icon with placeholder */
+.user-icon-placeholder {
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  object-fit: cover;
+  background-color: #aeb913;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.approver-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.approver-dropdown {
+  flex: 1;
+}
+
+.approver-dropdown select {
+  width: 100%;
+}
+
+.add-external-button {
+  background-color: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-external-button:hover {
+  background-color: #e5e7eb;
 }
 
 .date-time-picker {

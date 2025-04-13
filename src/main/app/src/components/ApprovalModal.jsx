@@ -1,6 +1,8 @@
 // components/ApprovalModal.jsx
 import React, { useState, useEffect } from "react";
 import { fetchApprovers, submitApprovalRequest } from "../services/ApprovalService";
+import { getOrCreateExternalUser } from "../services/UserService";
+import AddUserModal from "./AddUserModal";
 import "./ApprovalModal.css";
 
 const ApprovalModal = ({ isOpen, onClose, document }) => {
@@ -15,6 +17,8 @@ const ApprovalModal = ({ isOpen, onClose, document }) => {
   const [dueTime, setDueTime] = useState("17:00");
   const [submitting, setSubmitting] = useState(false);
   const [sendNotifications, setSendNotifications] = useState(true);
+  const [showAddUserModal, setShowAddUserModal] = useState(false);
+  const [selectedTab, setSelectedTab] = useState("internal"); // 'internal' or 'external'
 
   useEffect(() => {
     if (isOpen) {
@@ -54,6 +58,34 @@ const ApprovalModal = ({ isOpen, onClose, document }) => {
 
   const handleRemoveApprover = (approverId) => {
     setSelectedApprovers(selectedApprovers.filter(a => a.id !== approverId));
+  };
+
+  const handleShowAddUserModal = () => {
+    setShowAddUserModal(true);
+  };
+
+  const handleUserAdded = async (userData) => {
+    try {
+      // Create or get external user
+      const user = await getOrCreateExternalUser(userData);
+      console.log("User created/retrieved:", user);
+
+      // Add to selected approvers
+      handleAddApprover({
+        id: user.id,
+        userId: user.userId,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        displayName: user.displayName
+      });
+
+      // Close modal
+      setShowAddUserModal(false);
+    } catch (error) {
+      console.error("Error adding user:", error);
+      alert("Failed to add user. Please try again.");
+    }
   };
 
   const handleSubmit = async () => {
@@ -108,17 +140,18 @@ const ApprovalModal = ({ isOpen, onClose, document }) => {
 
           <div className="add-approvers">
             <label>Add Approvers <span className="required">*</span></label>
-            <div className="approver-selection">
-              <div className="selected-approvers">
-                {selectedApprovers.map(approver => (
-                  <div key={approver.id} className="selected-approver">
-                    <img src="/user-icon.png" alt="User" className="user-icon" />
-                    <span>{approver.displayName || approver.email}</span>
-                    <button onClick={() => handleRemoveApprover(approver.id)}>×</button>
-                  </div>
-                ))}
-              </div>
 
+            <div className="selected-approvers">
+              {selectedApprovers.map(approver => (
+                <div key={approver.id || approver.email} className="selected-approver">
+                  <img src="/user-icon.png" alt="User" className="user-icon" />
+                  <span>{approver.displayName || approver.email}</span>
+                  <button onClick={() => handleRemoveApprover(approver.id || approver.email)}>×</button>
+                </div>
+              ))}
+            </div>
+
+            <div className="approver-actions">
               <div className="approver-dropdown">
                 <select
                   onChange={(e) => {
@@ -130,7 +163,7 @@ const ApprovalModal = ({ isOpen, onClose, document }) => {
                   }}
                   value=""
                 >
-                  <option value="">Select approvers...</option>
+                  <option value="">Select internal approvers...</option>
                   {approvers.map(approver => (
                     <option key={approver.id} value={approver.id}>
                       {approver.displayName || approver.email}
@@ -138,6 +171,13 @@ const ApprovalModal = ({ isOpen, onClose, document }) => {
                   ))}
                 </select>
               </div>
+
+              <button
+                className="add-external-button"
+                onClick={handleShowAddUserModal}
+              >
+                Add External User
+              </button>
             </div>
           </div>
 
@@ -224,6 +264,13 @@ const ApprovalModal = ({ isOpen, onClose, document }) => {
           </button>
         </div>
       </div>
+
+      {/* Add User Modal */}
+      <AddUserModal
+        isOpen={showAddUserModal}
+        onClose={() => setShowAddUserModal(false)}
+        onUserAdded={handleUserAdded}
+      />
     </div>
   );
 };
