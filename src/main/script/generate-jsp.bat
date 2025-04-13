@@ -30,7 +30,7 @@ if not exist "%ASSETS_DIR%" (
 
 echo Generating home.jsp.
 (
-    echo ^<%@ page contentType="text/html;charset=UTF-8" language="java" %^>
+    echo ^<%%@ page contentType="text/html;charset=UTF-8" language="java" %%^>
     echo ^<!DOCTYPE html^>
     echo ^<html lang="en"^>
     echo ^<head^>

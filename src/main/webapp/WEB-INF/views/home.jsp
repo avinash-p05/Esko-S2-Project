@@ -1,14 +1,14 @@
-<>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My App</title>
-    <link rel="stylesheet" href="/static/assets/index-D2qZYV39.css">
+    <link rel="stylesheet" href="/static/assets/index-BUSRvqy6.css">
 </head>
 <body>
     <div id="root"></div>
-    <script src="/static/assets/index-RnvVH9kt.js"></script>
+    <script src="/static/assets/index-DxOpTwF8.js"></script>
 </body>
 </html>

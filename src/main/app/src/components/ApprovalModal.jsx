@@ -144,7 +144,6 @@ const ApprovalModal = ({ isOpen, onClose, document }) => {
             <div className="selected-approvers">
               {selectedApprovers.map(approver => (
                 <div key={approver.id || approver.email} className="selected-approver">
-                  <img src="/user-icon.png" alt="User" className="user-icon" />
                   <span>{approver.displayName || approver.email}</span>
                   <button onClick={() => handleRemoveApprover(approver.id || approver.email)}>×</button>
                 </div>

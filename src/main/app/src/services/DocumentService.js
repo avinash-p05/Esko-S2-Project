@@ -12,6 +12,11 @@ const repoApi = axios.create({
   withCredentials: true,
 });
 
+const viewApi = axios.create({
+  baseURL: config.apiBaseUrls.view,
+  withCredentials: true,
+});
+
 export const fetchDocuments = async () => {
   try {
     const response = await approveApi.get(
@@ -44,7 +49,10 @@ export const fetchDocuments = async () => {
         thumbnail: source["contentPath-S3-thumbnail-200x200"],
         largeThumbnail: source["contentPath-S3-thumbnail-500x500"],
         nodePath: source.path,
-        actions: source["ec_id@actions"] || []
+        actions: source["ec_id@actions"] || [],
+        approveStatus: source["ec_s@approve_status"] || [],
+        organizationId: config.repoId,
+        siteName: config.siteName
       };
     });
   } catch (error) {
@@ -62,6 +70,53 @@ export const getDownloadUrl = async (nodePath) => {
     return response.data.url;
   } catch (error) {
     console.error("Error getting download URL:", error);
+    throw error;
+  }
+};
+
+export const approveDocument = async (document) => {
+  try {
+    const organizationId = document.organizationId || config.repoId;
+    const siteName = document.siteName || config.siteName;
+    const documentPath = document.nodePath.split('/').pop() || document.name;
+
+    const url = `/api/v1/approval/submit/${organizationId}/${siteName}/${documentPath}`;
+
+    const response = await viewApi.post(url, {
+      actions: [
+        {
+          action: "force_approve"
+        }
+      ]
+    });
+
+    if (response.status !== 200) {
+      throw new Error(`Failed to approve document: ${response.statusText}`);
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error("Error approving document:", error);
+    throw error;
+  }
+};
+
+export const deleteDocument = async (documentPath) => {
+  try {
+    const response = await approveApi.delete('/rest/organizations/deletenode', {
+      data: [{ path: documentPath }],
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (response.status !== 200) {
+      throw new Error(`Failed to delete document: ${response.statusText}`);
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting document:", error);
     throw error;
   }
 };

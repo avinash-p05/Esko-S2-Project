@@ -38,7 +38,7 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <h1 className="app-title">Document Repository</h1>
+      <h1 className="app-title">Share and Approve</h1>
 
       <div className="document-container">
         <div className="header-row">
@@ -56,7 +56,7 @@ const App = () => {
 
         <DocumentGrid documents={documents} isLoading={isLoading} />
       </div>
-      
+
       {/* Upload button positioned at bottom right */}
       <UploadButton onUploadSuccess={handleUploadSuccess} />
     </div>

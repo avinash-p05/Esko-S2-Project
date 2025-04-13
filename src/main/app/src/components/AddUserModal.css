@@ -1,219 +1,151 @@
-// components/AddUserModal.jsx
-import React, { useState } from "react";
-import "./AddUserModal.css";
+/* components/AddUserModal.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
-const AddUserModal = ({ isOpen, onClose, onUserAdded }) => {
-  const [userType, setUserType] = useState("internal");
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [function_, setFunction] = useState("");
-  const [initials, setInitials] = useState("");
-  const [telephone, setTelephone] = useState("");
-  const [partner, setPartner] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+.add-user-modal {
+  background-color: white;
+  border-radius: 4px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
 
-  // Reset form state when modal opens
-  React.useEffect(() => {
-    if (isOpen) {
-      setUserType("internal");
-      setEmail("");
-      setFirstName("");
-      setLastName("");
-      setFunction("");
-      setInitials("");
-      setTelephone("");
-      setPartner("");
-      setIsSubmitting(false);
-    }
-  }, [isOpen]);
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
 
-  // Validate form based on required fields
-  const isFormValid = () => {
-    return email.trim() !== "" && firstName.trim() !== "" && lastName.trim() !== "";
-  };
+.modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
 
-  // Handle create user action
-  const handleCreateUser = async () => {
-    if (!isFormValid()) return;
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #999;
+}
 
-    setIsSubmitting(true);
-    try {
-      const userData = {
-        email,
-        firstName,
-        lastName,
-        function: function_,
-        initials,
-        telephone: telephone,
-        userType: userType === "internal" ? "internal" : "external",
-        // Additional fields can be added here
-      };
+.modal-body {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
-      // Call parent handler with user data
-      await onUserAdded(userData);
-      onClose();
-    } catch (error) {
-      console.error("Error creating user:", error);
-      // Could add error handling UI here
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
-  if (!isOpen) return null;
+.form-row {
+  display: flex;
+  gap: 16px;
+}
 
-  return (
-    <div className="modal-overlay">
-      <div className="add-user-modal">
-        <div className="modal-header">
-          <h2>Add New User</h2>
-          <button className="close-button" onClick={onClose}>×</button>
-        </div>
+.form-group.half {
+  flex: 1;
+}
 
-        <div className="modal-body">
-          {/* User Type Selection */}
-          <div className="form-group">
-            <label>Type</label>
-            <div className="radio-group">
-              <label className="radio-label">
-                <input
-                  type="radio"
-                  name="userType"
-                  value="internal"
-                  checked={userType === "internal"}
-                  onChange={() => setUserType("internal")}
-                />
-                Internal
-              </label>
-              <label className="radio-label">
-                <input
-                  type="radio"
-                  name="userType"
-                  value="external"
-                  checked={userType === "external"}
-                  onChange={() => setUserType("external")}
-                />
-                External
-              </label>
-            </div>
-          </div>
+.form-group label {
+  font-weight: 500;
+  color: #333;
+}
 
-          {/* Email Address */}
-          <div className="form-group">
-            <label htmlFor="email">
-              <span className="required">*</span> E-mail Address
-            </label>
-            <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
-              required
-            />
-          </div>
+.required {
+  color: red;
+}
 
-          {/* First and Last Name */}
-          <div className="form-row">
-            <div className="form-group half">
-              <label htmlFor="firstName">
-                <span className="required">*</span> First Name
-              </label>
-              <input
-                id="firstName"
-                type="text"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                placeholder="First Name"
-                required
-              />
-            </div>
-            <div className="form-group half">
-              <label htmlFor="lastName">
-                <span className="required">*</span> Last Name
-              </label>
-              <input
-                id="lastName"
-                type="text"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                placeholder="Last Name"
-                required
-              />
-            </div>
-          </div>
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
 
-          {/* Function and Initials */}
-          <div className="form-row">
-            <div className="form-group half">
-              <label htmlFor="function">Function</label>
-              <input
-                id="function"
-                type="text"
-                value={function_}
-                onChange={(e) => setFunction(e.target.value)}
-                placeholder="Function"
-              />
-            </div>
-            <div className="form-group half">
-              <label htmlFor="initials">Initials</label>
-              <input
-                id="initials"
-                type="text"
-                value={initials}
-                onChange={(e) => setInitials(e.target.value)}
-                placeholder="Initials"
-              />
-            </div>
-          </div>
+.radio-group {
+  display: flex;
+  gap: 16px;
+}
 
-          {/* Telephone Number */}
-          <div className="form-group">
-            <label htmlFor="telephone">Telephone Number</label>
-            <input
-              id="telephone"
-              type="tel"
-              value={telephone}
-              onChange={(e) => setTelephone(e.target.value)}
-              placeholder="Telephone Number"
-            />
-          </div>
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
 
-          {/* Partner (only shown for External users) */}
-          {userType === "external" && (
-            <div className="form-group">
-              <label htmlFor="partner">Partner</label>
-              <div className="partner-select-container">
-                <input
-                  id="partner"
-                  type="text"
-                  value={partner}
-                  onChange={(e) => setPartner(e.target.value)}
-                  placeholder="Start typing to search for a partner"
-                  className="partner-input"
-                />
-                <span className="dropdown-arrow">▼</span>
-              </div>
-            </div>
-          )}
-        </div>
+.partner-select-container {
+  position: relative;
+}
 
-        <div className="modal-footer">
-          <button className="cancel-button" onClick={onClose}>
-            Cancel
-          </button>
-          <button
-            className="create-button"
-            onClick={handleCreateUser}
-            disabled={!isFormValid() || isSubmitting}
-          >
-            {isSubmitting ? "Creating..." : "Create"}
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
+.partner-input {
+  width: 100%;
+}
 
-export default AddUserModal;
+.dropdown-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.cancel-button, .create-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+.create-button {
+  background-color: #c0c840;
+  border: 1px solid #a6ad33;
+  color: white;
+}
+
+.create-button:disabled, .cancel-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

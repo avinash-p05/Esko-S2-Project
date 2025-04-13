@@ -5,9 +5,9 @@ const config = {
   approveBaseUrl: "http://approve.ldev.cloudi.city:11000",
 
   //avinash
-//  accountId: "a-dev-1009-0010-0003-5441",
+  accountId: "a-dev-1009-0010-0003-5441",
 //sahil
-  accountId: "a-dev-1001-0010-0009-3551",
+//  accountId: "a-dev-1001-0010-0009-3551",
   apiBaseUrls: {
       search: "http://search.ldev.cloudi.city:11000",
       iam: "http://iam.ldev.cloudi.city:11000",
@@ -16,12 +16,12 @@ const config = {
   },
 
   // Sahil
-  repoId: "Hcpd89J8CsD9dQy",
-  siteName: "avinash-food",
+//  repoId: "Hcpd89J8CsD9dQy",
+//  siteName: "avinash-food",
 
   //Avinash
-//  repoId: "Hcpd89J8AankZsi",
-//  siteName: "esko-interns",
+  repoId: "Hcpd89J8AankZsi",
+  siteName: "test",
 
   // Full paths used in API calls
   get organizationPath() {

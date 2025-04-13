@@ -60,7 +60,7 @@
 }
 
 .download-button {
-  background-color: #2563eb;
+  background-color: #444b54;
   color: white;
   border: none;
   border-radius: 4px;
@@ -72,7 +72,7 @@
 }
 
 .download-button:hover {
-  background-color: #1d4ed8;
+  background-color: #626d7a;
 }
 
 .download-button:disabled {
@@ -80,6 +80,7 @@
   cursor: not-allowed;
 }
 
+/* Original approve button - for "Setup Approval" */
 .approve-button {
   background-color: #aeb913;
   color: white;
@@ -102,10 +103,76 @@
   cursor: not-allowed;
 }
 
+/* New approve-pending button - for documents pending approval */
+.approve-pending-button {
+  background-color: #5bc0de;
+  color: white;
+  border: none;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: auto;
+  transition: background-color 0.2s;
+}
+
+.approve-pending-button:hover {
+  background-color: #68b3ff;
+}
+
+/* New approved button - for already approved documents */
+.approved-button {
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: default;
+  margin-top: auto;
+}
+
 .loading-message,
 .no-documents-message {
   color: #6b7280;
   text-align: center;
   padding: 24px;
   font-size: 16px;
+}
+
+.document-card {
+  position: relative;
+}
+
+.delete-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.document-card:hover .delete-button {
+  opacity: 1;
+}
+
+.delete-button:hover {
+  background-color: rgba(239, 68, 68, 0.8);
+}
+
+.delete-icon {
+  width: 16px;
+  height: 16px;
 }

@@ -1,0 +1,75 @@
+/* components/DeleteConfirmDialog.css */
+.delete-confirm-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.delete-confirm-dialog {
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.delete-confirm-dialog h2 {
+  margin-top: 0;
+  font-size: 18px;
+  color: #111827;
+}
+
+.delete-warning {
+  color: #ef4444;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.delete-confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.delete-cancel-button {
+  background-color: #f3f4f6;
+  color: #374151;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.delete-cancel-button:hover {
+  background-color: #e5e7eb;
+}
+
+.delete-confirm-button {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.delete-confirm-button:hover {
+  background-color: #dc2626;
+}
+
+.delete-confirm-button:disabled,
+.delete-cancel-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
