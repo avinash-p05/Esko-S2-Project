@@ -1,8 +1,9 @@
 // App.jsx
 import React, { useState, useEffect } from "react";
 import UploadButton from "./components/UploadButton";
-import DocumentGrid from "./components/DocumentGrid";
+import DocumentsContainer from "./components/DocumentsContainer";
 import { fetchDocuments } from "./services/DocumentService";
+import { ToastProvider } from "./components/Toast/ToastProvider";
 import "./App.css";
 
 const App = () => {
@@ -36,9 +37,15 @@ const App = () => {
     loadDocuments();
   };
 
+  // Handler for when documents are updated (approved, deleted, etc.)
+  const handleDocumentsUpdate = (updatedDocuments) => {
+    setDocuments(updatedDocuments);
+  };
+
   return (
+    <ToastProvider>
     <div className="app-container">
-      <h1 className="app-title">Share and Approve</h1>
+      <h1 className="app-title">Mini Share & Approve</h1>
 
       <div className="document-container">
         <div className="header-row">
@@ -54,12 +61,17 @@ const App = () => {
 
         {error && <div className="error-message">{error}</div>}
 
-        <DocumentGrid documents={documents} isLoading={isLoading} />
+        <DocumentsContainer
+          documents={documents}
+          isLoading={isLoading}
+          onDocumentsUpdate={handleDocumentsUpdate}
+        />
       </div>
 
       {/* Upload button positioned at bottom right */}
       <UploadButton onUploadSuccess={handleUploadSuccess} />
     </div>
+   </ToastProvider>
   );
 };
 

@@ -4,6 +4,8 @@ import { fetchApprovers, submitApprovalRequest } from "../services/ApprovalServi
 import { getOrCreateExternalUser } from "../services/UserService";
 import AddUserModal from "./AddUserModal";
 import "./ApprovalModal.css";
+import { useToast } from "./Toast/ToastProvider";
+
 
 const ApprovalModal = ({ isOpen, onClose, document }) => {
   const [approvers, setApprovers] = useState([]);
@@ -19,6 +21,8 @@ const ApprovalModal = ({ isOpen, onClose, document }) => {
   const [sendNotifications, setSendNotifications] = useState(true);
   const [showAddUserModal, setShowAddUserModal] = useState(false);
   const [selectedTab, setSelectedTab] = useState("internal"); // 'internal' or 'external'
+  const toast = useToast();
+
 
   useEffect(() => {
     if (isOpen) {
@@ -84,13 +88,13 @@ const ApprovalModal = ({ isOpen, onClose, document }) => {
       setShowAddUserModal(false);
     } catch (error) {
       console.error("Error adding user:", error);
-      alert("Failed to add user. Please try again.");
+      toast.error("Failed to add user. Please try again.");
     }
   };
 
   const handleSubmit = async () => {
     if (selectedApprovers.length === 0) {
-      alert("Please add at least one approver");
+      toast.error("Please add at least one approver");
       return;
     }
 
@@ -107,10 +111,10 @@ const ApprovalModal = ({ isOpen, onClose, document }) => {
       };
 
       await submitApprovalRequest(document, approvalData);
-      alert("Approval request submitted successfully");
+      toast.success("Approval request submitted successfully");
       onClose();
     } catch (error) {
-      alert("Failed to submit approval request. Please try again.");
+      toast.error("Failed to submit approval request. Please try again.");
     } finally {
       setSubmitting(false);
     }

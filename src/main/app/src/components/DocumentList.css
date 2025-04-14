@@ -1,0 +1,209 @@
+/* components/DocumentList.css */
+.document-list {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 16px;
+  background-color: white;
+}
+
+.document-list-header {
+  display: flex;
+  background-color: #f3f4f6;
+  font-weight: 600;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
+}
+
+.document-list-row {
+  display: flex;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.document-list-row:last-child {
+  border-bottom: none;
+}
+
+.document-list-row:hover {
+  background-color: #f9fafb;
+}
+
+.document-list-col {
+  display: flex;
+  align-items: center;
+}
+
+.document-list-preview {
+  width: 10%;
+  min-width: 80px;
+}
+
+.document-list-name {
+  width: 40%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.document-list-status {
+  width: 20%;
+}
+
+.document-list-actions {
+  width: 30%;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.list-thumbnail-image {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 4px;
+  background-color: #f5f5f5;
+}
+
+.list-no-thumbnail {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  color: #9ca3af;
+  font-size: 12px;
+  text-align: center;
+}
+
+.list-approve-button {
+  background-color: #aeb913;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.list-approve-button:hover {
+  background-color: #7c8508;
+}
+
+.list-approve-button:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}
+
+.list-approve-pending-button {
+  background-color: #5bc0de;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.list-approve-pending-button:hover {
+  background-color: #68b3ff;
+}
+
+.list-approved-status {
+  background-color: #5cb85c;
+  color: white;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.list-rejected-status {
+  background-color: #d9534f;
+  color: white;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.list-download-button {
+  background-color: #444b54;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.list-download-button:hover {
+  background-color: #626d7a;
+}
+
+.list-download-button:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}
+
+.list-delete-button {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.list-delete-button:hover {
+  background-color: rgba(239, 68, 68, 0.8);
+}
+
+.list-delete-icon {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 768px) {
+  .document-list-preview {
+    display: none;
+  }
+
+  .document-list-name {
+    width: 50%;
+  }
+
+  .document-list-status {
+    width: 20%;
+  }
+
+  .document-list-actions {
+    width: 30%;
+  }
+}
+
+@media (max-width: 576px) {
+  .document-list-col {
+    font-size: 12px;
+  }
+
+  .list-download-button,
+  .list-approve-button,
+  .list-approve-pending-button,
+  .list-approved-status,
+  .list-rejected-status {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+}

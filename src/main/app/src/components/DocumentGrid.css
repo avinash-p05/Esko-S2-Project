@@ -176,3 +176,25 @@
   width: 16px;
   height: 16px;
 }
+
+.rejected-button {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: auto;
+  transition: background-color 0.2s;
+}
+
+.rejected-button:hover {
+  background-color: #a53f3c;
+}
+
+.rejected-button:disabled {
+  background-color: #d9534f;
+  cursor: not-allowed;
+}

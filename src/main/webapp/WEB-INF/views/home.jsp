@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My App</title>
-    <link rel="stylesheet" href="/static/assets/index-BUSRvqy6.css">
+    <link rel="stylesheet" href="/static/assets/index-DdcC4Peh.css">
 </head>
 <body>
     <div id="root"></div>
-    <script src="/static/assets/index-DxOpTwF8.js"></script>
+    <script src="/static/assets/index-Bt5ULrkM.js"></script>
 </body>
 </html>

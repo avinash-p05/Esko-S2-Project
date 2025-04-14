@@ -324,7 +324,7 @@ export const submitApprovalRequest = async (document, approvalData) => {
     if (!approvalData.sendNotifications) {
       actions.push({
         action: "edit_cycle_settings",
-        removeNotifications: true
+        removeNotifications: false
       });
     }
 
